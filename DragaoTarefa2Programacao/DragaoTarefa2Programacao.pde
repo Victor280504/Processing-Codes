@@ -18,7 +18,7 @@ void gradiente() {
     stroke(70, 0, i);
     line(0, i, 600, i);
   }
-  fill(255, 255, 0);
+  fill(255, 180, 0);
   noStroke();
   arc(300, 400, 300, 300, radians(180), radians(360));
   fill(255, 255, 0,30);
