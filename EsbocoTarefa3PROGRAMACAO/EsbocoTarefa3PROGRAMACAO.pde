@@ -49,10 +49,48 @@ void keyPressed() {
       println("Boa Sorte.");
     }
     if (j==9) {
-      println("Acabaram as instruções , era só isso. Vai jogar!");
+      println("Acabaram as instruções , era só isso. Vai jogar!", "PS- 0 para limpar.");
     }
   }
   j++;
+  if (keyCode==48) {
+    println("                                                                                                      ");
+    println("                                                                                                      ");
+    println("                                                                                                      ");
+    println("                                                                                                      ");
+    println("                                                                                                      ");
+    println("                                                                                                      ");
+    println("                                                                                                      ");
+    println("                                                                                                      ");
+    println("                                                                                                      ");
+    println("                                                                                                      ");
+    println("                                                                                                      ");
+    println("                                                                                                      ");
+    println("                                                                                                      ");
+    println("                                                                                                      ");
+    println("                                                                                                      ");
+    println("                                                                                                      ");
+    println("                                                                                                      ");
+    println("                                                                                                      ");
+    println("                                                                                                      ");
+    println("                                                                                                      ");
+    println("                                                                                                      ");
+    println("                                                                                                      ");
+    println("                                                                                                      ");
+    println("                                                                                                      ");
+    println("                                                                                                      ");
+    println("                                                                                                      ");
+    println("                                                                                                      ");
+    println("                                                                                                      ");
+    println("                                                                                                      ");
+    println("                                                                                                      ");
+    println("                                                                                                      ");
+    println("                                                                                                      ");
+    println("                                                                                                      ");
+    println("                                                                                                      ");
+    println("                                                                                                      ");
+    println("                                                                                                      ");
+  }
 
   if (keyPressed) {
     if (keyCode == 49) {
