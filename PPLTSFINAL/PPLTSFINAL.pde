@@ -1,7 +1,7 @@
 int w, h, w2, h2, w4, h4, w6, h6;//variáveis de tamanho
 PFont cambria, sanSerif; // variaveis de fontes
 color corBotaoR, corBotaoP, corFontR, corFontP, corBotao1R, corBotao1P, corFont1R, corFont1P;//variaveis de cor 
-boolean jogar, regras, menuEscolha, menuMostrador, reseta, logica; //booleans 
+boolean jogar, regras, menuEscolha, menuMostrador; //booleans 
 PImage default1, vs, voltarP, voltarR, botaoResetarR, botaoResetarP, imgPe, imgPa, imgTe, imgLa, imgSp, imgPeR, imgPaR, imgTeR, imgLaR, imgSpR, imgResultJog, imgResultPC, fightP, fightR, voltarResultP, voltarResultR;//variaveis de imagens
 PImage imgPeC, imgPaC, imgTeC, imgLaC, imgSpC, resultado, ganhou, empatou, perdeu;
 int pedra, papel, tesoura, lagarto, spock;//variaveis referentes a logica
@@ -84,7 +84,6 @@ void setup() {
 
 
 void draw() {
-
   if (jogar) {
     if (menuEscolha) {
       menuEscolha();
@@ -156,7 +155,7 @@ void mousePressed() {
 //Parte Gráfica
 void menuPrincipal() {
   noStroke();
-  fill(168, 50, 100, 52.9);
+  fill(168, 30, 100, 52.9);
   rect(0, 0, w, h);
   fill(180, 100, 50);
   textFont(cambria);
@@ -194,7 +193,7 @@ void menuPrincipal() {
 }
 void regras() {
   noStroke();
-  fill(168, 50, 100, 52.9);
+  fill(168, 30, 100, 52.9);
   rect(0, 0, w, h);
   fill(180, 100, 50);
   textFont(cambria);
@@ -228,26 +227,46 @@ void regras() {
   imagensOpcoesRegras();
 }
 void jogarLogica() {
-  reusult1();
-  reusult2();
-  reusult3();
-  reusult4();
-  reusult5();
+  escolha1();
+  escolha2();
+  escolha3();
+  escolha4();
+  escolha5();
 }
 void menuEscolha() {
   background(24, 33, 100);
   imageMode(CENTER);
-  image(imgPe, w4/1.1, h6);
-  image(imgPa, 3.1*w4, h6);
-  image(imgTe, w4/1.1, 5*h6);
-  image(imgLa, 3.1*w4, 5*h6);
-  image(imgSp, w2, h2);
   textFont(cambria);
   textSize(30);
   text("ESCOLHA", w6, h2);
   text("SUA", w2, h6);
   text("OPÇÃO", 5*w6, h2);
   menuEscolha=true;
+  if (mouseX>=0.066*w && mouseX<=0.3833*w && mouseY>=0.0116*h && mouseY<=0.321*h) {
+    image(imgPeR, w4/1.1, h6);
+  } else {
+    image(imgPe, w4/1.1, h6);
+  }
+  if (mouseX>=0.616*w && mouseX<=0.933*w && mouseY>=0.0116*h && mouseY<=0.321*h) {  //Papel
+    image(imgPaR, 3.1*w4, h6);
+  } else {
+    image(imgPa, 3.1*w4, h6);
+  }
+  if (mouseX>=0.066*w && mouseX<=0.3833*w && mouseY>=0.675*h && mouseY<=0.988*h) { //Tesoura
+    image(imgTeR, w4/1.1, 5*h6);
+  } else {
+    image(imgTe, w4/1.1, 5*h6);
+  } 
+  if (mouseX>=0.616*w && mouseX<=0.933*w && mouseY>=0.675*h && mouseY<=0.988*h) {  //Lagarto
+    image(imgLaR, 3.1*w4, 5*h6);
+  } else {
+    image(imgLa, 3.1*w4, 5*h6);
+  }
+  if (mouseX>=0.341*w && mouseX<=0.6583*w && mouseY>=0.333*h && mouseY<=0.65*h) {  //Spock
+    image(imgSpR, w2, h2);
+  } else {
+    image(imgSp, w2, h2);
+  }
 }
 void posicoesEscolha() {
   //Pedra
@@ -282,7 +301,7 @@ void imagensOpcoesRegras() {
   }
 }
 void mostrador() {
-  background(0, 33, 100);
+  background(270, 33, 100);
   image(imgResultJog, w/5, h6*2);
   if (mouseX>=0.4*w && mouseX<=0.6*w && mouseY>=0.025*h && mouseY<=0.1383*h) {
     image(fightP, w/2, h6/2);
@@ -338,7 +357,7 @@ void escolhaComputador() {
   }
   image(imgResultPC, 4*w/5, h6*2);
 }
-void reusult1() {
+void escolha1() {
   if (escolhaJogador==1 && escolhaComputador==1) {
     text("EMPATOU", w2, h6*2.75);
     text("ANULA", w2, h6*3.6);
@@ -363,7 +382,7 @@ void reusult1() {
     imagemPerdeu();
   }
 }
-void reusult2() {
+void escolha2() {
   if (escolhaJogador==2 && escolhaComputador==1) {
     text("GANHOU", w2, h6*2.75);
     text("EVNOLVE", w2, h6*3.6);
@@ -388,7 +407,7 @@ void reusult2() {
     imagemGanhou();
   }
 }
-void reusult3() {
+void escolha3() {
   if (escolhaJogador==3 && escolhaComputador==1) {
     text("PERDEU", w2, h6*2.75);
     text("QUEBRADA", w2, h6*3.5);
@@ -413,7 +432,7 @@ void reusult3() {
     imagemPerdeu();
   }
 }
-void reusult4() {
+void escolha4() {
   if (escolhaJogador==4 && escolhaComputador==1) {
     text("PERDEU", w2, h6*2.75);
     text("ESMAGADO", w2, h6*3.5);
@@ -438,7 +457,7 @@ void reusult4() {
     imagemGanhou();
   }
 }
-void reusult5() {
+void escolha5() {
   if (escolhaJogador==5 && escolhaComputador==1) {
     text("GANHOU", w2, h6*2.75);
     text("VAPORIZA", w2, h6*3.6);
@@ -465,11 +484,11 @@ void reusult5() {
 }
 void imagemGanhou() {
   image(ganhou, w4, 5*h6);
-  image(ganhou, 3*w4, 5*h6);
+  image(perdeu, 3*w4, 5*h6);
 }
 void imagemPerdeu() {
   image(perdeu, w4, 5*h6);
-  image(perdeu, 3*w4, 5*h6);
+  image(ganhou, 3*w4, 5*h6);
 }
 void imagemEmpatou() {
   image(empatou, w4, 5*h6);
