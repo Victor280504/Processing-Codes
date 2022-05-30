@@ -1,6 +1,5 @@
-
-//COLOCAR UM TEXTO ESCRITO:SUA PONTUAÇÃO,MUDAR A POSIÇÃO DOS TEXTOS = PONTUAÇÃO, 
-//COLOCAR SOM= FUNDO, ESCUDO, VIDA ESCUDO, GAMEOVER,EFEITOS AO CLICAR NOS BOTOES, SOM PARA O PAUSE,
+//LEMBRETE-CRIAR IMAGEM PARA O RESET , COLOCAR ELA DENTRO DE UMA FUNÇÃO E FAZER ELE APARECER SOMENTE QUANDO O USUARIO PERDER.--- reset e voltar-só quando o usuário perder ou pausar;= se perder aparecem na tela , caso seja por pausa ele só aparece lá.
+//FAZER NOVA IMAGEM PARA O PAUSE QUANDO A PESSOA PERDER , CRIAR UMA VARIÁVEL AUXILIAR PARA A IMAGEM DO PAUSE(auxImgPause), SE O (pauseGameOver=true) auxImgPause=pausePerdeu SE NÃO auxImgPause=menuPausa a imagem 
 void intro() {
   rectMode(CORNER);
   fill(255);
@@ -27,6 +26,7 @@ void intro() {
   else if (mouseX>=w/1.6666 && mouseX<=w/1.3043 && mouseY>=h/1.47874 && mouseY<=(h/1.47874)+(h/8)) {
     image(provaG, 0, 0, w, h);
   }
+
   introB=true;
 }
 void classico() {
@@ -146,7 +146,6 @@ void prova() {
   fill(255);
   textAlign(CENTER);
   text(auxProva, w2, h2);
-  auxProva2=true;
 }
 float b1Y, b2Y, b3Y, b4Y, eY;
 float eX, j, jE;
@@ -157,35 +156,62 @@ int w2;
 int h2;
 
 //Classico
-PImage classicoG, auxClassico, cidadeClassicoDestruida, cidadeClassico, bombaClassico, escudoClassico, naveClassico, auxClassicoG;
+PImage classicoG;
+PImage auxClassicoG;
+PImage naveClassico;
+PImage escudoClassico;
+PImage bombaClassico;
+PImage cidadeClassico;
+PImage cidadeClassicoDestruida;
+PImage auxClassico;
 //
 //Naruto
-PImage narutoG, auxNaruto, bombaNaruto, escudoNaruto, cidadeNarutoDestruida, cidadeNaruto, auxNarutoG;
+PImage narutoG;
+PImage auxNarutoG;
+PImage cidadeNaruto;
+PImage cidadeNarutoDestruida;
+PImage escudoNaruto;
+PImage bombaNaruto;
+PImage auxNaruto;
 //
 //Goku
-PImage gokuG, auxGoku, cidadeGokuDestruida, cidadeGoku, bombaGoku, escudoGoku, naveGoku, auxGokuG;
+PImage gokuG;
+PImage auxGokuG;
+PImage naveGoku;
+PImage escudoGoku;
+PImage bombaGoku;
+PImage cidadeGoku;
+PImage cidadeGokuDestruida;
+PImage auxGoku;
 //
 //Megamen
-PImage megamenG, auxMegamenG, naveMegamen, escudoMegamen, bombaMegamen, cidadeMegamen, cidadeMegamenDestruida, auxMegamen;
+PImage megamenG;
+PImage auxMegamenG;
+PImage naveMegamen;
+PImage escudoMegamen;
+PImage bombaMegamen;
+PImage cidadeMegamen;
+PImage cidadeMegamenDestruida;
+PImage auxMegamen;
+PImage menuPausa;
 //
 //prova
-PImage provaG, auxImgPause;
+PImage provaG;
+PImage BregrasG;
 
-PImage intro, escolha, regras, BregrasG;
-
-PImage menuPausa, pauseGameOver;
-
-PImage comSom, semSom;
-
-
+PImage comSom;
+PImage semSom;
+PImage intro;
+PImage escolha;
+PImage regras;
 int pontos;
 int e;
 int corE=0;
 boolean start, classico, naruto, megamen, goku, prova, Bprova, Bclassico, Bmegamen, Bgoku, Bnaruto, Bregras, introB, reset, bGa, bCa, bNa, bMa, bPa;
-boolean end, BpauseGameOver;
+boolean end, pauseGameOver;
 boolean auxStart ;
 int auxR;
-boolean menuPause, BmenuPause, auxReset, auxProva2;
+boolean menuPause, BmenuPause, auxReset;
 int auxSom;
 String auxProva;
 
@@ -206,7 +232,6 @@ void setup() {
   intro=loadImage("telaInicial.png");
   escolha=loadImage("escolha.png");
   menuPausa=loadImage("menuPausa.png");
-  pauseGameOver=loadImage("pauseGameOver.png");
   comSom=loadImage("som.png");
   semSom=loadImage("semSom.png");
 
@@ -261,7 +286,7 @@ void setup() {
 }
 
 void draw() {
-  println(e);
+  println(mouseX, mouseY);
   introB=false;
   if (auxStart) {
     if (start) {
@@ -335,20 +360,20 @@ void mousePressed() {
       reset();
       antiReset();
     }
-
-    //som  
-    if (mouseX<=w/5.94059 && mouseY>=h/1.40350 && mouseY<=h/1.19225) {
-      if (mouseButton==LEFT) {
-        auxSom++;
-      }
-      if (auxSom%2==0) {
-        // som.play();
-        image(comSom, 0, 0, w, h);
-      } else {
-        // som.stop();
-        image(semSom, 0, 0, w, h);
-      }
-    }
+    //som
+    /*if (mouseX<=w/5.94059 && mouseY>=h/1.40350 && mouseY<=h/1.19225) {
+     if (mouseButton==LEFT) {
+     auxSom++;
+     
+     }
+     if (auxSom%2==0) {
+     som.play();
+     image(comSom, 0, 0, w, h);
+     } else {
+     som.stop();
+     image(semSom, 0, 0, w, h);
+     }
+     }*/
   }
   if (Bclassico) {
     if (mouseX>=w/3.076 && mouseX<=(w/3.076)+(w/6) && mouseY>=h/1.85614 && mouseY<=(h/1.85614)+(h/8)) {
@@ -450,35 +475,33 @@ void mousePressed() {
     }
   }
   if (bPa) {
-    if (prova) {
-      if (auxProva2) {
-        if (!(mouseY>=h/1.6 && mouseY<=h/1.333)) {
-          e+=3;
-        } else {
-          e--;
-        }
+    if (!(mouseY>=h/1.6 && mouseY<=h/1.333)) {
+      e+=2;
+    } else {
+      e--;
+    }
+    if (mouseY>=h/1.6 && mouseY<=h/1.333) {
+      if (b1Y>=h/1.775 && b1Y<=h/1.403) {
+        b1Y=0;
+        pontos++;
       }
-      if (mouseY>=h/1.6 && mouseY<=h/1.333) {
-        if (b1Y>=h/1.775 && b1Y<=h/1.403) {
-          b1Y=0;
-          pontos++;
-        }
 
-        if (b2Y>=h/1.775 && b2Y<=h/1.403) {
-          b2Y=0;
-          pontos++;
-        }
-        if ( b3Y>=h/1.775 && b3Y<=h/1.403) {
-          b3Y=0;
-          pontos++;
-        }
-        if (b4Y>=h/1.775 && b4Y<=h/1.403) {
-          b4Y=0;
-          pontos++;
-        }
+      if (b2Y>=h/1.775 && b2Y<=h/1.403) {
+        b2Y=0;
+        pontos++;
+      }
+      if ( b3Y>=h/1.775 && b3Y<=h/1.403) {
+        b3Y=0;
+        pontos++;
+      }
+      if (b4Y>=h/1.775 && b4Y<=h/1.403) {
+        b4Y=0;
+        pontos++;
       }
     }
   }
+
+
   //prova
   if (Bprova) {
     if (mouseX>=w/1.6666 && mouseX<=w/1.3043 && mouseY>=h/1.47874 && mouseY<=(h/1.47874)+(h/8)) {
@@ -504,15 +527,10 @@ void mousePressed() {
       Bregras=false;
     }
   }
-  if (end) {
-    BpauseGameOver=true;
-  } else {
-    BpauseGameOver=false;
-  }
 }
 void keyPressed() {
   logicaBotoes();
-  if (keyCode==32 && BmenuPause==true || BpauseGameOver==true) {//espaço pausa
+  if (keyCode==32 && BmenuPause==true || pauseGameOver==true) {//espaço pausa
     menuPause=!(menuPause);
     if (menuPause) {
       start=false;
@@ -529,7 +547,6 @@ void keyPressed() {
       }
       menuPausa();
     } else {
-      auxProva2=true;
       antiReset();
     }
   }
@@ -537,14 +554,8 @@ void keyPressed() {
   println(menuPause, BmenuPause);
 }
 void menuPausa() {
-  if (BpauseGameOver) {
-    auxImgPause=pauseGameOver;
-  } else {
-    auxImgPause=menuPausa;
-  }
-  image(auxImgPause, 0, 0, w, h);
+  image(menuPausa, 0, 0, w, h);
   menuPause=true;
-  auxProva2=false;
 }
 void logicaBotoes() {
   if (keyCode==ENTER) {
@@ -605,7 +616,7 @@ void logicaBotoes() {
   }
 }
 void logica() {
-  b1Y+=(random(0, h/100))+j;
+  b1Y+=(random(0, 8))+j;
   b2Y+=(random(0, h/133.33))+j;
   b3Y+=(random(0, h/88.88))+j;
   b4Y+=(random(0, h/114.28))+j;
@@ -645,17 +656,17 @@ void logica() {
   }
   println(e);
   if (end) {
-    if (bCa)
-      auxClassico=cidadeClassicoDestruida;
-    else if (bGa)
-      auxGoku=cidadeGokuDestruida;
-    else if (bMa)
-      auxMegamen=cidadeMegamenDestruida;
-    else if (bNa)
-      auxNaruto=cidadeNarutoDestruida;
-    else if (bPa)
-      auxProva="BOOOOOOoooooOOOOoooMMmmmmm";
-    BpauseGameOver=true;
+    if(bCa)
+    auxClassico=cidadeClassicoDestruida;
+    else if(bGa)
+    auxGoku=cidadeGokuDestruida;
+    else if(bMa)
+    auxMegamen=cidadeMegamenDestruida;
+    else if(bNa)
+    auxNaruto=cidadeNarutoDestruida;
+    else if(bPa)
+    auxProva="BOOOOOOoooooOOOOoooMMmmmmm";
+    pauseGameOver=true;
     //gameOver=new SoundFile(this, "gameOver.mp3");
     //gameOver.play();
   } else {
@@ -664,7 +675,7 @@ void logica() {
     auxMegamen=cidadeMegamen;
     auxNaruto=cidadeNaruto;
     auxProva="";
-    BpauseGameOver=false;
+    pauseGameOver=false;
   }
 }
 
@@ -697,16 +708,6 @@ void antiReset() {
 void regras() {
   auxStart=true;
   image(regras, 0, 0, w, h);
-  Bmegamen=false;
-  Bgoku=false;
-  Bclassico=false;
-  Bnaruto=false;
-  Bprova=false;
-  bGa=false;
-  bNa=false;
-  bCa=false;
-  bMa=false;
-  bPa=false;
 }
 void resetRegras() {
   auxStart=false;

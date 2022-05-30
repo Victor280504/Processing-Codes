@@ -1,13 +1,9 @@
-
-//COLOCAR UM TEXTO ESCRITO:SUA PONTUAÇÃO,MUDAR A POSIÇÃO DOS TEXTOS = PONTUAÇÃO, 
-//COLOCAR SOM= FUNDO, ESCUDO, VIDA ESCUDO, GAMEOVER,EFEITOS AO CLICAR NOS BOTOES, SOM PARA O PAUSE,
 void intro() {
   rectMode(CORNER);
   fill(255);
   rect(0, 0, width, height);
   image(intro, 0, 0, w, h);
   image(escolha, 0, 0, w, h);
-
   //regras
   if (mouseX>=w/3.20855 && mouseX<=w/1.43884 && mouseY>=h/2.76816 && mouseY<=h/2.15053)
     image(BregrasG, 0, 0, w, h);
@@ -48,7 +44,6 @@ void classico() {
   text("PONTUAÇÃO="+pontos, 0, h/9);
   text("ESCUDO="+e, 0, h/1.37);
 }
-
 void naruto() {
   rectMode(CORNER);
   image(auxNaruto, 0, 0, w, h);
