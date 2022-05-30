@@ -142,7 +142,7 @@ void prova() {
   text("PONTUAÇÃO="+pontos, 0, h/6);
   text("ESCUDO="+e, 0, h/1.37);
   fill(corE, 0, 0, 100);
-  rect(0, h/1.6, w, h/8);
+  rect(0, h/1.775, w, h/8);
   fill(255);
   textAlign(CENTER);
   text(auxProva, w2, h2);
@@ -185,7 +185,7 @@ boolean start, classico, naruto, megamen, goku, prova, Bprova, Bclassico, Bmegam
 boolean end, BpauseGameOver;
 boolean auxStart ;
 int auxR;
-boolean menuPause, BmenuPause, auxReset, auxProva2;
+boolean menuPause, BmenuPause, auxReset, auxProva2, blockEnter;
 int auxSom;
 String auxProva;
 
@@ -261,7 +261,7 @@ void setup() {
 }
 
 void draw() {
-  println(e);
+  println(e, j, jE, mouseX, mouseY);
   introB=false;
   if (auxStart) {
     if (start) {
@@ -329,6 +329,7 @@ void mousePressed() {
     //home
     if (mouseX>=w/3.5294 && mouseX<=w/2.0689 && mouseY>=h/2 && mouseY <=h/1.5384) {
       auxStart=false;
+      reset();
     }
     //resetar pontuação
     if (mouseX>=w/1.93548 && mouseX<=w/1.39534 && mouseY>=h/2 && mouseY <=h/1.5384) {
@@ -372,6 +373,7 @@ void mousePressed() {
       bPa=false;
       Bclassico=false;
       Bregras=false;
+      blockEnter=false;
     }
   }
 
@@ -397,6 +399,7 @@ void mousePressed() {
       bPa=false;
       Bnaruto=false;
       Bregras=false;
+      blockEnter=false;
     }
   }
   //goku
@@ -422,6 +425,7 @@ void mousePressed() {
       bPa=false;
       Bgoku=false;
       Bregras=false;
+      blockEnter=false;
     }
   }
   //megamen
@@ -447,18 +451,20 @@ void mousePressed() {
       bPa=false;
       Bmegamen=false;
       Bregras=false;
+      blockEnter=false;
     }
   }
   if (bPa) {
     if (prova) {
+      blockEnter=false;
       if (auxProva2) {
-        if (!(mouseY>=h/1.6 && mouseY<=h/1.333)) {
+        if (!(mouseY>=h/1.775 && mouseY<=h/1.403)) {
           e+=3;
         } else {
           e--;
         }
       }
-      if (mouseY>=h/1.6 && mouseY<=h/1.333) {
+      if (mouseY>=h/1.775 && mouseY<=h/1.403) {
         if (b1Y>=h/1.775 && b1Y<=h/1.403) {
           b1Y=0;
           pontos++;
@@ -476,6 +482,15 @@ void mousePressed() {
           b4Y=0;
           pontos++;
         }
+      }
+      if (e<=0) {
+        b1Y=h;
+        b2Y=h;
+        b3Y=h;
+        b4Y=h;
+        eY=h;
+        e++;
+        end=true;
       }
     }
   }
@@ -502,6 +517,7 @@ void mousePressed() {
       bPa=true;
       Bmegamen=false;
       Bregras=false;
+      blockEnter=false;
     }
   }
   if (end) {
@@ -516,6 +532,7 @@ void keyPressed() {
     menuPause=!(menuPause);
     if (menuPause) {
       start=false;
+      blockEnter=true;
       if (bGa) {
         goku=false;
       } else if (bCa) {
@@ -529,6 +546,7 @@ void keyPressed() {
       }
       menuPausa();
     } else {
+      blockEnter=false;
       auxProva2=true;
       antiReset();
     }
@@ -547,7 +565,7 @@ void menuPausa() {
   auxProva2=false;
 }
 void logicaBotoes() {
-  if (keyCode==ENTER) {
+  if (keyCode==ENTER && blockEnter==false) {
     start=true;
     //somEscudo=new SoundFile(this, "somEscudo.mp3");
     //somEscudo.play();
@@ -591,12 +609,14 @@ void logicaBotoes() {
       b4Y=0;
       pontos++;
     }
-    if (eY>=h/1.775 && eY<=h/1.403) {
-      eY=0;
-      e+=10;
-      corE=0;
-      //somVidaEscudo = new SoundFile(this, "somVidaEscudo.mp3");
-      //somVidaEscudo.play();
+    if (bPa==false) {
+      if (eY>=h/1.775 && eY<=h/1.403) {
+        eY=0;
+        e+=10;
+        corE=0;
+        //somVidaEscudo = new SoundFile(this, "somVidaEscudo.mp3");
+        //somVidaEscudo.play();
+      }
     }
   }
   if (pontos>=30) {
@@ -676,9 +696,12 @@ void reset() {
   b4Y= 0;
   eY = 0;
   e=20;
+  j=0;
+  jE=0;
   corE=100;
   end=false;
   pontos=0;
+  blockEnter=false;
 }
 void antiReset() {
   if (bGa) {
