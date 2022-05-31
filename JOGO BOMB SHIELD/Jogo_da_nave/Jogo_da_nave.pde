@@ -179,21 +179,26 @@ PImage comSom, semSom;
 
 
 int pontos;
-int e;
+int e, n;
 int corE=0;
 boolean start, classico, naruto, megamen, goku, prova, Bprova, Bclassico, Bmegamen, Bgoku, Bnaruto, Bregras, introB, reset, bGa, bCa, bNa, bMa, bPa;
-boolean end, BpauseGameOver;
+boolean end, BpauseGameOver, testeSom;
 boolean auxStart ;
 int auxR;
 boolean menuPause, BmenuPause, auxReset, auxProva2, blockEnter;
 int auxSom;
 String auxProva;
+boolean somTeste(int n) {
+  if (n==2)
+    return true;
+  else return false;
+}
 
-//import processing.sound.*;
+import processing.sound.*;
 //SoundFile som;
 //SoundFile somEscudo;
 //SoundFile somVidaEscudo;
-//SoundFile gameOver;
+SoundFile gameOver;
 
 void setup() {
 
@@ -210,7 +215,7 @@ void setup() {
   comSom=loadImage("som.png");
   semSom=loadImage("semSom.png");
 
-  //som = new SoundFile(this, "fundo.mp3");
+  gameOver= new SoundFile(this, "gameOver.mp3");
   // som.amp(0.2);
   // som.loop();
   //CLASSICO
@@ -251,7 +256,7 @@ void setup() {
   provaG=loadImage("provaG.png");
   BregrasG=loadImage("BregrasG.png");
   regras=loadImage("regras.png");
-
+  n=1;
   pontos=0;
   e=20;
   eX=w/2;
@@ -261,6 +266,8 @@ void setup() {
 }
 
 void draw() {
+  if (somTeste(n))
+    gameOver.play();
   println(e, j, jE, mouseX, mouseY);
   introB=false;
   if (auxStart) {
@@ -676,6 +683,8 @@ void logica() {
     else if (bPa)
       auxProva="BOOOOOOoooooOOOOoooMMmmmmm";
     BpauseGameOver=true;
+    somTeste(n);
+    n++;
     //gameOver=new SoundFile(this, "gameOver.mp3");
     //gameOver.play();
   } else {
@@ -702,6 +711,7 @@ void reset() {
   end=false;
   pontos=0;
   blockEnter=false;
+  n=1;
 }
 void antiReset() {
   if (bGa) {
