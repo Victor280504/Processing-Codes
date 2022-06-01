@@ -1,5 +1,4 @@
 //COLOCAR UM TEXTO ESCRITO:SUA PONTUAÇÃO,MUDAR A POSIÇÃO DOS TEXTOS = PONTUAÇÃO, 
-//COLOCAR SOM= FUNDO, ESCUDO, VIDA ESCUDO, GAMEOVER,EFEITOS AO CLICAR NOS BOTOES, SOM PARA O PAUSE,
 void intro() {
   rectMode(CORNER);
   fill(255);
@@ -168,7 +167,7 @@ boolean start, auxStart2, classico, naruto, megamen, goku, prova, Bprova, Bclass
 boolean end, BpauseGameOver, testeSom;
 boolean auxStart ;
 int auxR;
-boolean menuPause, BmenuPause, auxReset, auxProva2, blockEnter, Bescolha, Bcreditos, Bintro;
+boolean menuPause, BmenuPause, auxReset, auxProva2, blockEnter, Bescolha, Bcreditos, Bintro, BcSom, BsSom;
 int auxSom;
 String auxProva;
 boolean somTeste(int n) {
@@ -310,6 +309,9 @@ void draw() {
         bPa=true;
         Bregras=false;
         Bcreditos=false;
+        BmenuPause=false;
+        BpauseGameOver=false;
+        blockEnter=true;
       } else {
         Bmegamen=false;
         Bgoku=false;
@@ -324,13 +326,11 @@ void draw() {
       }
     } else {
       intro();
+      BmenuPause=false;
+      BpauseGameOver=false;
       reset();
+      blockEnter=true;
     }
-  }
-  if (end) {
-    BpauseGameOver=true;
-  } else {
-    BpauseGameOver=false;
   }
 }
 void mousePressed() {
@@ -374,10 +374,11 @@ void mousePressed() {
     if (mouseX>=w/1.93548 && mouseX<=w/1.39534 && mouseY>=h/2 && mouseY <=h/1.5384) {
       reset();
       antiReset();
+      BmenuPause=false;
     }
 
     //som  
-    if (mouseX<=w/5.94059 && mouseY>=h/1.40350 && mouseY<=h/1.19225) {
+    if (mouseX<=w/5.94059 && mouseY>=h/1.40350 && mouseY<=h/1.19225 && menuPause==true || mouseX<=w/5.94059 && mouseY>=h/1.40350 && mouseY<=h/1.19225 && BpauseGameOver==true) {
       if (mouseButton==LEFT) {
         auxSom++;
       }
@@ -413,7 +414,6 @@ void mousePressed() {
       bPa=false;
       Bclassico=false;
       Bregras=false;
-      Bescolha=false;
       Bcreditos=false;
       blockEnter=false;
       Bescolha=false;
@@ -444,7 +444,6 @@ void mousePressed() {
       bPa=false;
       Bnaruto=false;
       Bregras=false;
-      Bescolha=false;
       Bcreditos=false;
       blockEnter=false;
       Bescolha=false;
@@ -475,7 +474,6 @@ void mousePressed() {
       bPa=false;
       Bgoku=false;
       Bregras=false;
-      Bescolha=false;
       Bcreditos=false;
       blockEnter=false;
       Bescolha=false;
@@ -505,7 +503,6 @@ void mousePressed() {
       bPa=false;
       Bmegamen=false;
       Bregras=false;
-      Bescolha=false;
       Bcreditos=false;
       blockEnter=false;
       Bescolha=false;
@@ -574,7 +571,6 @@ void mousePressed() {
       bPa=true;
       Bmegamen=false;
       Bregras=false;
-      Bescolha=false;
       Bcreditos=false;
       blockEnter=false;
       Bescolha=false;
@@ -607,13 +603,14 @@ void keyPressed() {
   }
 }
 void menuPausa() {
+  menuPause=true;
   if (BpauseGameOver) {
     auxImgPause=pauseGameOver;
   } else {
     auxImgPause=menuPausa;
   }
+
   image(auxImgPause, 0, 0, w, h);
-  menuPause=true;
   auxProva2=false;
 }
 void logicaBotoes() {
@@ -633,7 +630,6 @@ void logicaBotoes() {
     if (e<=2) {
       corE=255;
     }
-
     if (e<=0) {
       b1Y=h;
       b2Y=h;
