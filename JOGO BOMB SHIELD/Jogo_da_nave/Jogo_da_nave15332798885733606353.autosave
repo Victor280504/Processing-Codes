@@ -5,12 +5,28 @@ void intro() {
   fill(255);
   rect(0, 0, width, height);
   image(intro, 0, 0, w, h);
-  if (mouseX>=w*0.2666 && mouseX<=w*0.7333 && mouseY>=0.3375*h && mouseY<=0.4625*h)
+  image(escolha, 0, 0, w, h);
+
+  //regras
+  if (mouseX>=w/3.20855 && mouseX<=w/1.43884 && mouseY>=h/2.76816 && mouseY<=h/2.15053)
     image(BregrasG, 0, 0, w, h);
-  if (mouseX>=w/3.20855 && mouseX<=w/1.43884 && mouseY>=h/2 && mouseY<=h/1.6)
-    image(jogarG, 0, 0, w, h);
-  if (mouseX >=w/2.88461 && mouseX<=w/1.53846 && mouseY>=h/1.37221 && mouseY<=h/1.23456)
-    image(creditosG, 0, 0, w, h);
+  //classico
+  if (mouseX>=w/3.076 && mouseX<=(w/3.076)+(w/6) && mouseY>=h/1.85614 && mouseY<=(h/1.85614)+(h/8))
+    image(classicoG, 0, 0, w, h);
+  //naruto
+  else if (mouseX>=w/1.967 && mouseX<=(w/1.967)+(w/6) && mouseY>=h/1.85614 && mouseY<=(h/1.85614)+(h/8))
+    image(narutoG, 0, 0, w, h);
+  //goku
+  else if (mouseX>=w/4.285 && mouseX<=(w/4.285)+(w/6) && mouseY>=h/1.47874 && mouseY<=(h/1.478743)+(h/8))
+    image(gokuG, 0, 0, w, h);
+  //megamen
+  else if (mouseX>=w/2.4 && mouseX<=(w/2.4)+(w/6) && mouseY>=h/1.47874 && mouseY<=(h/1.47874)+(h/8))
+    image(megamenG, 0, 0, w, h);
+  //prova
+  else if (mouseX>=w/1.6666 && mouseX<=w/1.3043 && mouseY>=h/1.47874 && mouseY<=(h/1.47874)+(h/8)) {
+    image(provaG, 0, 0, w, h);
+  }
+  introB=true;
 }
 void classico() {
   rectMode(CORNER);
@@ -154,21 +170,21 @@ PImage megamenG, auxMegamenG, naveMegamen, escudoMegamen, bombaMegamen, cidadeMe
 //prova
 PImage provaG, auxImgPause;
 
-PImage intro, escolha, auxBjogar, regras, BregrasG;
+PImage intro, escolha, regras, BregrasG;
 
 PImage menuPausa, pauseGameOver;
 
-PImage comSom, semSom, jogarG, creditosG, creditos;
+PImage comSom, semSom;
 
 
 int pontos;
 int e, n;
 int corE=0;
-boolean start, auxStart2, classico, naruto, megamen, goku, prova, Bprova, Bclassico, Bmegamen, Bgoku, Bnaruto, Bregras, introB, reset, bGa, bCa, bNa, bMa, bPa;
+boolean start, classico, naruto, megamen, goku, prova, Bprova, Bclassico, Bmegamen, Bgoku, Bnaruto, Bregras, introB, reset, bGa, bCa, bNa, bMa, bPa;
 boolean end, BpauseGameOver, testeSom;
 boolean auxStart ;
 int auxR;
-boolean menuPause, BmenuPause, auxReset, auxProva2, blockEnter, Bescolha, Bcreditos, Bintro;
+boolean menuPause, BmenuPause, auxReset, auxProva2, blockEnter;
 int auxSom;
 String auxProva;
 boolean somTeste(int n) {
@@ -178,39 +194,36 @@ boolean somTeste(int n) {
 }
 
 import processing.sound.*;
-SoundFile som, somEscudo, somVidaEscudo, gameOver, somClassico, somNaruto, somGoku, somMegamen;
+SoundFile som,somEscudo,somVidaEscudo,gameOver,somClassico,somNaruto,somGoku,somMegamen;
 
 void setup() {
 
-  size(300, 400);
+  size(600, 800);
   noStroke();
   h=height;
   w=width;
   h2=height/2;
   w2=width/2;
   intro=loadImage("telaInicial.png");
-  escolha=loadImage("escolhaTema.png");
+  escolha=loadImage("escolha.png");
   menuPausa=loadImage("menuPausa.png");
   pauseGameOver=loadImage("pauseGameOver.png");
   //
-  jogarG=loadImage("jogarG.png");
-  creditosG=loadImage("creditosG.png");
-  creditos=loadImage("creditos.png");
   //som
   comSom=loadImage("som.png");
   semSom=loadImage("semSom.png");
   somEscudo=new SoundFile(this, "somEscudo.mp3");
   somVidaEscudo = new SoundFile(this, "somVidaEscudo.mp3");
   gameOver= new SoundFile(this, "gameOver.mp3");
-  som=new SoundFile(this, "fundo.mp3");
-  som.amp(0.1);
-  somEscudo.amp(0.1);
-  somVidaEscudo.amp(0.1);
+  som=new SoundFile(this,"fundo.mp3");
+  som.amp(0.15);
+  somEscudo.amp(0.15);
+  somVidaEscudo.amp(0.15);
   som.loop();
   //
   //CLASSICO
-  somClassico=new SoundFile(this, "classico.mp3");
-  somClassico.amp(0.3);
+  somClassico=new SoundFile(this,"classico.mp3");
+  somClassico.amp(0.2);
   classicoG=loadImage("classicoG.png");
   naveClassico=loadImage("naveClassico.png");
   bombaClassico=loadImage("bombaClassico.png");
@@ -220,8 +233,8 @@ void setup() {
   auxClassico=cidadeClassico;
   //
   //NARUTO
-  somNaruto=new SoundFile (this, "naruto.mp3");
-  somNaruto.amp(0.3);
+  somNaruto=new SoundFile (this,"naruto.mp3");
+  somNaruto.amp(0.2);
   narutoG=loadImage("narutoG.png");
   cidadeNaruto=loadImage("cidadeNaruto.png");
   cidadeNarutoDestruida=loadImage("cidadenarutoDestruido.png");
@@ -230,8 +243,8 @@ void setup() {
   escudoNaruto=loadImage("escudoNaruto.png");
   //
   //GOKU
-  somGoku=new SoundFile (this, "goku.mp3");
-  somGoku.amp(0.3);
+  somGoku=new SoundFile (this,"goku.mp3");
+  somGoku.amp(0.2);
   gokuG=loadImage("gokuG.png");
   naveGoku=loadImage("naveGoku.png");
   bombaGoku=loadImage("bombaGoku.png");
@@ -241,8 +254,8 @@ void setup() {
   auxGoku=cidadeGoku;
   //
   //MEGAMEN
-  somMegamen= new SoundFile (this, "megamen.mp3");
-  somMegamen.amp(0.3);
+  somMegamen= new SoundFile (this,"megamen.mp3");
+  somMegamen.amp(0.2);
   megamenG=loadImage("megamenG.png");
   naveMegamen=loadImage("naveMegamen.png");
   bombaMegamen=loadImage("bombaMegamen.png");
@@ -268,13 +281,13 @@ void setup() {
 void draw() {
   if (somTeste(n))
     gameOver.play();
-  gameOver.amp(0.2);
-  //println(e, j, jE, mouseX, mouseY);
+  println(e, j, jE, mouseX, mouseY);
   introB=false;
   if (auxStart) {
     if (start) {
       logica();
     }
+
     if (classico) {
       classico();
     } else if (naruto) {
@@ -287,87 +300,50 @@ void draw() {
       prova();
     }
   } else {
-    if (auxStart2) {
-      if (Bescolha) {
-        escolha();
-      }
-      if (Bcreditos)
-        creditos();
-      if (Bregras)
-        regras();
-      if (introB) {
-        Bmegamen=true;
-        Bgoku=true;
-        Bclassico=true;
-        Bnaruto=true;
-        Bprova=true;
-        reset=false;
-        BmenuPause=false;
-        bGa=true;
-        bNa=true;
-        bCa=true;
-        bMa=true;
-        bPa=true;
-        Bregras=false;
-        Bcreditos=false;
-      } else {
-        Bmegamen=false;
-        Bgoku=false;
-        Bclassico=false;
-        Bnaruto=false;
-        Bprova=false;
-        bGa=false;
-        bNa=false;
-        bCa=false;
-        bMa=false;
-        bPa=false;
-      }
+    intro();
+    if (introB) {
+      Bmegamen=true;
+      Bgoku=true;
+      Bclassico=true;
+      Bnaruto=true;
+      Bprova=true;
+      reset=false;
+      BmenuPause=false;
+      bGa=true;
+      bNa=true;
+      bCa=true;
+      bMa=true;
+      bPa=true;
+      Bregras=true;
     } else {
-      intro();
-      reset();
+      Bmegamen=false;
+      Bgoku=false;
+      Bclassico=false;
+      Bnaruto=false;
+      Bprova=false;
+      bGa=false;
+      bNa=false;
+      bCa=false;
+      bMa=false;
+      bPa=false;
     }
-  }
-  if (end) {
-    BpauseGameOver=true;
-  } else {
-    BpauseGameOver=false;
+    reset();
   }
 }
 void mousePressed() {
-  if (auxStart2==false) {
-    if (mouseX >=w/2.88461 && mouseX<=w/1.53846 && mouseY>=h/1.37221 && mouseY<=h/1.23456 ) {
-      auxStart2=true;
-      Bcreditos=true;
-    }
-    if (mouseX>=w/3.20855 && mouseX<=w/1.43884 && mouseY>=h/2 && mouseY<=h/1.6 ) {
-      auxStart2=true;
-      Bescolha=true;
-    }
+  if (Bregras) {
     if (mouseX>=w/3.20855 && mouseX<=w/1.43884 && mouseY>=h/2.76816 && mouseY<=h/2.15053) {
-      auxStart2=true;
-      Bregras=true;
+      regras();
+    }
+    if (mouseX>=0 && mouseX<=0.1666*w && mouseY>=0.875*h && mouseY<=h) {
+      resetRegras();
     }
   }
-  println(mouseX, mouseY);
-  if (mouseY>=0 && mouseX<=0.166666*w && mouseY>=0.6875*h && mouseY<=0.8125*h && Bescolha==false && Bregras==false) {
-    resetRegras();
-    Bcreditos=false;
-    introB=false;
-  }
-  if (mouseX>=0 && mouseX<=0.1666*w && mouseY>=0.875*h && mouseY<=h && Bescolha==false && Bcreditos==false ) {
-    resetRegras();
-    Bregras=false;
-    introB=false;
-  }
-  println(auxStart2, Bregras, Bcreditos);
   if (reset==true && menuPause==true) {
 
     //home
     if (mouseX>=w/3.5294 && mouseX<=w/2.0689 && mouseY>=h/2 && mouseY <=h/1.5384) {
       auxStart=false;
-      auxStart2=false;
-      BmenuPause=false;
-
       reset();
     }
     //resetar pontuação
@@ -413,17 +389,14 @@ void mousePressed() {
       bPa=false;
       Bclassico=false;
       Bregras=false;
-      Bescolha=false;
-      Bcreditos=false;
       blockEnter=false;
-      Bescolha=false;
     }
   }
 
   if (Bnaruto) {
 
     if (mouseX>=w/1.967 && mouseX<=(w/1.967)+(w/6) && mouseY>=h/1.85614 && mouseY<=(h/1.85614)+(h/8)) {
-      somNaruto.play();
+          somNaruto.play();
       start=true;
       auxStart=true;
       classico=false;
@@ -444,17 +417,14 @@ void mousePressed() {
       bPa=false;
       Bnaruto=false;
       Bregras=false;
-      Bescolha=false;
-      Bcreditos=false;
       blockEnter=false;
-      Bescolha=false;
     }
   }
   //goku
   if (Bgoku) {
-
+   
     if (mouseX>=w/4.285 && mouseX<=(w/4.285)+(w/6) && mouseY>=h/1.47874 && mouseY<=(h/1.478743)+(h/8)) {
-      somGoku.play();
+       somGoku.play();
       start=true;
       auxStart=true;
       goku=true;
@@ -475,10 +445,7 @@ void mousePressed() {
       bPa=false;
       Bgoku=false;
       Bregras=false;
-      Bescolha=false;
-      Bcreditos=false;
       blockEnter=false;
-      Bescolha=false;
     }
   }
   //megamen
@@ -505,10 +472,7 @@ void mousePressed() {
       bPa=false;
       Bmegamen=false;
       Bregras=false;
-      Bescolha=false;
-      Bcreditos=false;
       blockEnter=false;
-      Bescolha=false;
     }
   }
   if (bPa) {
@@ -574,11 +538,13 @@ void mousePressed() {
       bPa=true;
       Bmegamen=false;
       Bregras=false;
-      Bescolha=false;
-      Bcreditos=false;
       blockEnter=false;
-      Bescolha=false;
     }
+  }
+  if (end) {
+    BpauseGameOver=true;
+  } else {
+    BpauseGameOver=false;
   }
 }
 void keyPressed() {
@@ -602,9 +568,12 @@ void keyPressed() {
       menuPausa();
     } else {
       blockEnter=false;
+      auxProva2=true;
       antiReset();
     }
   }
+
+  println(menuPause, BmenuPause);
 }
 void menuPausa() {
   if (BpauseGameOver) {
@@ -713,7 +682,7 @@ void logica() {
     e=0;
     end=true;
   }
-
+  println(e);
   if (end) {
     if (bCa)
       auxClassico=cidadeClassicoDestruida;
@@ -727,6 +696,7 @@ void logica() {
       auxProva="BOOOOOOoooooOOOOoooMMmmmmm";
     BpauseGameOver=true;
     n++;
+    som.stop();
   } else {
     auxClassico=cidadeClassico;
     auxGoku=cidadeGoku;
@@ -734,6 +704,7 @@ void logica() {
     auxNaruto=cidadeNaruto;
     auxProva="";
     BpauseGameOver=false;
+    
   }
 }
 
@@ -752,7 +723,6 @@ void reset() {
   pontos=0;
   blockEnter=false;
   n=1;
-  Bescolha=false;
 }
 void antiReset() {
   if (bGa) {
@@ -769,7 +739,7 @@ void antiReset() {
   start=true;
 }
 void regras() {
-  auxStart2=true;
+  auxStart=true;
   image(regras, 0, 0, w, h);
   Bmegamen=false;
   Bgoku=false;
@@ -781,42 +751,7 @@ void regras() {
   bCa=false;
   bMa=false;
   bPa=false;
-  Bescolha=false;
-  Bcreditos=false;
 }
 void resetRegras() {
-  auxStart2=false;
-}
-
-void creditos() {
-  auxStart2=true;
-  image(creditos, 0, 0, w, h);
-  Bmegamen=false;
-  Bgoku=false;
-  Bclassico=false;
-  Bnaruto=false;
-  Bprova=false;
-  bGa=false;
-  bNa=false;
-  bCa=false;
-  bMa=false;
-  bPa=false;
-  Bescolha=false;
-  Bregras=false;
-}
-void escolha() {
-  //classico
-  image(escolha, 0, 0, w, h);
-  if (mouseX>=w/3.076 && mouseX<=(w/3.076)+(w/6) && mouseY>=h/1.85614 && mouseY<=(h/1.85614)+(h/8)) {
-    image(classicoG, 0, 0, w, h);
-  } else if (mouseX>=w/1.967 && mouseX<=(w/1.967)+(w/6) && mouseY>=h/1.85614 && mouseY<=(h/1.85614)+(h/8)) {
-    image(narutoG, 0, 0, w, h);
-  } else  if (mouseX>=w/4.285 && mouseX<=(w/4.285)+(w/6) && mouseY>=h/1.47874 && mouseY<=(h/1.478743)+(h/8)) {
-    image(gokuG, 0, 0, w, h);
-  } else  if (mouseX>=w/2.4 && mouseX<=(w/2.4)+(w/6) && mouseY>=h/1.47874 && mouseY<=(h/1.47874)+(h/8)) {
-    image(megamenG, 0, 0, w, h);
-  } else  if (mouseX>=w/1.6666 && mouseX<=w/1.3043 && mouseY>=h/1.47874 && mouseY<=(h/1.47874)+(h/8)) {
-    image(provaG, 0, 0, w, h);
-  }
-  introB=true;
+  auxStart=false;
 }
